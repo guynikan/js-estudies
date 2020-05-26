@@ -31,6 +31,7 @@ console.log(pessoa);
 
 const dest = { a: 1 };
 const o1 = { b: 2 };
+// o último subscreve os anteriores, caso a chave seja a mesma
 const o2 = { c: 3, a: 5 };
 
 const obj = Object.assign(dest, o1, o2);
