@@ -9,6 +9,13 @@ const produto = {
   getPreco,
 };
 
+/* 
+existem quatro formas de se chamar uma função:
+1) diretamente (getPreco())
+2) a partir do objeto (produto.getPreco())
+3) usando call e apply (getPreco.call(contexto, parametros da função)
+4) usando call e apply (getPreco.apply(contexto, parametros da função)*/
+
 console.log(getPreco());
 console.log(produto.getPreco());
 
