@@ -1,24 +1,44 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset='UTF-8'>
+  <head>
+    <meta charset="UTF-8" />
     <title>Acessando Atributos #02</title>
-    <link rel='stylesheet' href='css/estilo.css'>
-</head>
+    <link rel="stylesheet" href="css/estilo.css" />
+  </head>
 
-<body class='conteudo exercicio'>
+  <body class="conteudo exercicio">
     <div>
-        <label for="compras">Compras</label>
-        <ul id="compras" destino='escritório' data-urgencia="5">
-            <li>Café</li>
-            <li>Água</li>
-            <li>Copo Descartável</li>
-        </ul>
+      <label for="compras">Compras</label>
+      <ul id="compras" destino="escritório" data-urgencia="5">
+        <li>Café</li>
+        <li>Água</li>
+        <li>Copo Descartável</li>
+      </ul>
     </div>
     <script>
-        // ...
-    </script>
-</body>
+      const lista = document.querySelector('div ul[destino="escritório"]');
 
+      console.log('Elemento "ul"....................');
+      // retorna undefined pois o browser n conhece atributos personalizados
+      console.log("destino", lista.destino);
+      // retorna o valor do atributo
+      console.log("getAttribute", lista.getAttribute("destino"));
+      console.log("hasAttribute", lista.hasAttribute("destino"));
+
+      // seto o valor empresa ao attribute destino
+      lista.setAttribute("destino", "empresa");
+      // se n houver o attribute, ele cria
+      lista.setAttribute("status", "aberto");
+
+      lista.removeAttribute("destino");
+
+      const label = document.querySelector("label");
+
+      // palavra reservada que indica relação com a lista (dando ao for o mesmo nome do id da lista)
+      // por ser uma palavra reservada, o browser retorna seu valor como undefined
+      console.log(label.for);
+      // mas assim o valor (compras) é retornado
+      console.log(label.htmlFor);
+    </script>
+  </body>
 </html>
