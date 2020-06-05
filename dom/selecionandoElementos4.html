@@ -1,29 +1,66 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Selecionar Elementos #04</title>
-    <link rel="stylesheet" href="css/estilo.css">
-</head>
+    <link rel="stylesheet" href="css/estilo.css" />
+  </head>
 
-<body class="conteudo exercicio">
+  <body class="conteudo exercicio">
     <div>
-        <p>Início</p>
+      <p>Início</p>
     </div>
     <div>
-        <ul>
-            <li>Pedro</li>
-            <li>Ana</li>
-            <li>Bia</li>
-        </ul>
+      <ul>
+        <li>Pedro</li>
+        <li>Ana</li>
+        <li>Bia</li>
+      </ul>
     </div>
     <div>
-        <p>Fim</p>
+      <p>Fim</p>
     </div>
     <script>
-        // ...
-    </script>
-</body>
+      function log() {
+        console.log(this);
+      }
 
+      HTMLCollection.prototype.log = log;
+      HTMLElement.prototype.log = log;
+      NodeList.prototype.log = log;
+      Node.prototype.log = log;
+
+      // seleciono o elemento ul dentro de div
+      const lista = document.querySelector("div ul");
+
+      // peço pra imprimir o parentNode (pai de ul)
+      lista.parentNode.log();
+      // retorna uma nodeList contendo text, li,text,li...
+      // onde text são os espaços na formatação do código
+      lista.childNodes.log();
+      // pego o primeiro filho da lista (espaço em branco)
+      const primeiro = lista.firstChild;
+      // pego o próximo filho (elemento li)
+      primeiro.nextSibling.log();
+
+      // pego o ultimo filho da lista (espaço em branco)
+      const ultimo = lista.lastChild;
+      // pego o ultimo irmão, anterior ao ultimo (penultimo elemento)
+      ultimo.previousSibling.log();
+
+      // traz apenas as li, mas vem como um HTMLCollection
+      lista.children.log();
+      // tras a primeira li (diferente do childNode que tras o espaço em branco(text))
+      lista.firstElementChild.log();
+
+      // de div ul vai pra div, em div pega o elemento irmão anterior, em elemento irmão anterior(div inicio) pega o primeiro elemento filho
+      lista.parentNode.previousElementSibling.firstElementChild.log();
+
+      // de div ul vai pra div, em div pega o próximo elemento irmão, no próximo elemento irmão (div fim) pega o ultimo elemento filho
+
+      lista.parentNode.nextElementSibling.lastElementChild.log();
+
+      document.querySelectorAll("div ul li").log();
+    </script>
+  </body>
 </html>

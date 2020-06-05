@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Selecionar Elementos #01</title>
-    <link rel="stylesheet" href="css/estilo.css">
-</head>
-<body class="conteudo exercicio">
+    <link rel="stylesheet" href="css/estilo.css" />
+  </head>
+  <body class="conteudo exercicio">
     <div id="primeiro">#primeiro</div>
     <div>Segundo</div>
     <div class="terceiro ultimo">.terceiro .ultimo</div>
-    <script>              
-        // ...
+    <script>
+      document.getElementById("primeiro").classList.add("destaque");
+
+      // retorna um HTMLCollection
+      const divs = document.getElementsByTagName("div");
+
+      // transforma o HTMLCollection em um array.
+      // itera sobre o array, removendo (classList.remove) a classe destaque dos elementos
+      Array.from(divs).forEach((e) => e.classList.remove("destaque"));
+
+      // usando o spread tb transforma em array
+      const divsArray = [...divs];
+      divsArray.forEach((e) => e.classList.add("destaque"));
+
+      // mesmo que tenha um único elemento, ainda sim vai vir em um HTMLCollection
+      const ultimosElementos = document.getElementsByClassName("ultimo");
+
+      // HTMLCollection é uma lista. Ou seja, é possível iterar sobre ela
+      for (let e of ultimosElementos) {
+        e.classList.remove("destaque");
+      }
     </script>
-</body>
+  </body>
 </html>
