@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset='UTF-8'>
+  <head>
+    <meta charset="UTF-8" />
     <title>Modificando HTML #01</title>
-    <link rel='stylesheet' href='css/estilo.css'>
-</head>
+    <link rel="stylesheet" href="css/estilo.css" />
+  </head>
 
-<body class='conteudo exercicio'>
+  <body class="conteudo exercicio">
     <script>
-        // ...
-    </script>
-</body>
+      const body = document.querySelector("body");
 
+      const div1 = document.createElement("div");
+      div1.classList.add("destaque");
+      div1.innerHTML = "Primeiro";
+
+      const div2 = document.createElement("div");
+      div2.setAttribute("wm-attribute", "valor");
+      div2.innerHTML = "Segundo";
+
+      const p = document.createElement("p");
+      p.innerHTML = "Terceiro";
+      const div3 = document.createElement("div");
+      // faz um append adicionando o elemento na última posição dentro do elemento pai
+      div3.appendChild(p);
+
+      body.appendChild(div1);
+      body.appendChild(div2);
+      body.appendChild(div3);
+
+      // cria um nó de texto puro
+      const texto = document.createTextNode("...Antes");
+      // insere na div3 o nó de texto, antes do nó 0
+      div3.insertBefore(texto, div3.childNodes[0]);
+      // faz um clone a partir do elemento passado
+      // se true, clona também os filhos, se false, copia apenas o pai
+      const div4 = div3.cloneNode(true);
+
+      body.appendChild(div4);
+      body.removeChild(div3);
+    </script>
+  </body>
 </html>
