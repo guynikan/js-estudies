@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset='UTF-8'>
+  <head>
+    <meta charset="UTF-8" />
     <title>Trabalhando com Eventos #02</title>
-    <link rel='stylesheet' href='css/estilo.css'>
-</head>
+    <link rel="stylesheet" href="css/estilo.css" />
+  </head>
 
-<body class="conteudo exercicio">
+  <body class="conteudo exercicio">
     <div>Elemento</div>
     <script>
-        // ...
+      const item = document.querySelector("div");
+
+      // liberar o movimento do elemento na viewport
+      item.style.position = "absolute";
+
+      // adiciona à propriedade onmousemove da div a função que recebe o evento
+      item.onmousemove = (e) => {
+        // e.target é a div que disparou o evento
+        const item = e.target;
+        // muda o simbolo do cursor
+        item.style.cursor = "grab";
+        // se e.buttons tiver diferente de zero, significa que
+        // um clique foi realizado
+        if (e.buttons) {
+          // muda o estilo do cursor
+          item.style.cursor = "grabbing";
+          // no top adiciona o valor da posição do mouse
+          // menos metade da altura da div (pra mover pelo meio)
+          item.style.top = `${e.clientY - item.clientHeight / 2}px`;
+          // a partir da esquerda, pega exatamente a posição do mouse menos metade da div (meio)
+          e.target.style.left = `${e.clientX - item.clientWidth / 2}px`;
+        }
+      };
     </script>
-</body>
+  </body>
+</html>

@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset='UTF-8'>
+  <head>
+    <meta charset="UTF-8" />
     <title>Trabalhando com Eventos #01</title>
-    <link rel='stylesheet' href='css/estilo.css'>
-</head>
+    <link rel="stylesheet" href="css/estilo.css" />
+  </head>
 
-<body class="conteudo exercicio">
+  <body class="conteudo exercicio">
     <div>
-        <a href="https://google.com.br">Google</a>
+      <!-- é preciso passar por parametro a palavra event pra poder reconhecer -->
+      <a href="https://google.com.br">Google</a>
     </div>
     <script>
-        // ...
+      function saindoEm5s(e) {
+        // previne o comportamento padrão
+        e.preventDefault();
+        console.log("Saindo em 5s...");
+        setTimeout(() => {
+          // pego o link
+          const link = e.target;
+          // adiciono o link a barra de endereço do browser
+          window.location.href = link.href;
+        }, 5000);
+      }
+      // outra estratégia pra linkar a função ao elemento
+      // sem precisar adicionar direto ao elemento (hard-code)
+      const a = document.querySelector("a");
+      a.onclick = saindoEm5s;
     </script>
-</body>
+  </body>
+</html>

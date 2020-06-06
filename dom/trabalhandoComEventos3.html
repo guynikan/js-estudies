@@ -1,52 +1,81 @@
-</html>
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset='UTF-8'>
+  <head>
+    <meta charset="UTF-8" />
     <title>Trabalhando com Eventos #03</title>
     <style>
-        body {
-            margin: 0;
-            display: flex;
-        }
-        
-        .esquerda {
-            height: 100vh;
-            width: 50%;
-            background-color: coral;
-        }
-        
-        .direita {
-            height: 100vh;
-            width: 50%;
-            background-color: cornflowerblue;
-        }
-        
-        .item {
-            border: solid 5px black;
-            background-color: darkgrey;
-            color: white;
-            height: 100px;
-            font-size: 40px;
-            margin: 10px;
-            vertical-align: middle;
-            text-align: center;
-        }
-    </style>
-</head>
+      body {
+        margin: 0;
+        display: flex;
+      }
 
-<body>
+      .esquerda {
+        height: 100vh;
+        width: 50%;
+        background-color: coral;
+      }
+
+      .direita {
+        height: 100vh;
+        width: 50%;
+        background-color: cornflowerblue;
+      }
+
+      .item {
+        border: solid 5px black;
+        background-color: darkgrey;
+        color: white;
+        height: 100px;
+        font-size: 40px;
+        margin: 10px;
+        vertical-align: middle;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
     <div class="esquerda" wm-dropzone>
-        <div class="item">1</div>
-        <div class="item">2</div>
-        <div class="item">3</div>
-        <div class="item">4</div>
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
     </div>
     <div class="direita" wm-dropzone></div>
     <script>
-        // ...
-    </script>
-</body>
+      // seleciona os itens a serem arrastados
+      const items = document.querySelectorAll("[wm-dropzone] .item");
+      // itera sobre os itens, setando draggable como true pra todos
+      items.forEach((item, index) => {
+        item.draggable = true;
+        item.style.cursor = "grab";
+        // seta o id do item como ele mesmo ou o indice do item
+        item.id = item.id || `draggable-item-${index}`;
+        console.log(item.id);
+        // ao iniciar o drag, chama a função que adiciona ao dataTransfer(guarda o item sendo arrastado)
+        //o id do item
+        item.ondragstart = (e) =>
+          e.dataTransfer.setData("item-id", e.target.id);
+      });
 
+      // seleciona a area disponível para soltar os itens
+      const dropzones = document.querySelectorAll("[wm-dropzone]");
+      // itera sobre as areas, prevenindo o default da prop ondragover
+      dropzones.forEach((dropzone) => {
+        dropzone.ondragover = (e) => e.preventDefault();
+
+        // chama a função pra ondrop que recebe o evento
+        dropzone.ondrop = function (e) {
+          // pega o id do elemento sendo arrastado (elemento que está em dataTransfer)
+          const id = e.dataTransfer.getData("item-id");
+          // seleciona o elemento
+          const item = document.getElementById(id);
+          // faz um append com o elemento sendo arrastado, ao elemento onde o mouse está em cima (qualquer elemento)
+          // e.target.appendChild(item);
+          // faz um append com o elemento sendo arrastado, ao elemento onde o mouse está em cima (dropzone)
+          dropzone.appendChild(item);
+        };
+      });
+    </script>
+  </body>
 </html>
